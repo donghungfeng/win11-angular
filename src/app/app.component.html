@@ -1,516 +1,1607 @@
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * The content below * * * * * * * * * * * -->
-<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
-<!-- * * * * * * * * * * and can be replaced. * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * Delete the template below * * * * * * * * * * -->
-<!-- * * * * * * * to get started with your project! * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!DOCTYPE html>
+<html lang="hu">
 
-<style>
-  :host {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-    font-size: 14px;
-    color: #333;
-    box-sizing: border-box;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    margin: 8px 0;
-  }
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+    integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" />
+  <meta name="theme_color" content="#fff">
 
-  p {
-    margin: 0;
-  }
+  <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
 
-  .spacer {
-    flex: 1;
-  }
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  .toolbar {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 60px;
-    display: flex;
-    align-items: center;
-    background-color: #1976d2;
-    color: white;
-    font-weight: 600;
-  }
+  <meta name="description" content="Recreation of Binbows 11 in the browser made with html css js">
+  <div id="preloader">
+    <img class="Win11"
+      src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/Win11Favicon.png">
+    <p>Getting Ready </p>
+  </div>
 
-  .toolbar img {
-    margin: 0 16px;
-  }
-
-  .toolbar #twitter-logo {
-    height: 40px;
-    margin: 0 8px;
-  }
-
-  .toolbar #youtube-logo {
-    height: 40px;
-    margin: 0 16px;
-  }
-
-  .toolbar #twitter-logo:hover,
-  .toolbar #youtube-logo:hover {
-    opacity: 0.8;
-  }
-
-  .content {
-    display: flex;
-    margin: 82px auto 32px;
-    padding: 0 16px;
-    max-width: 960px;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  svg.material-icons {
-    height: 24px;
-    width: auto;
-  }
-
-  svg.material-icons:not(:last-child) {
-    margin-right: 8px;
-  }
-
-  .card svg.material-icons path {
-    fill: #888;
-  }
-
-  .card-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-top: 16px;
-  }
-
-  .card {
-    border-radius: 4px;
-    border: 1px solid #eee;
-    background-color: #fafafa;
-    height: 40px;
-    width: 200px;
-    margin: 0 8px 16px;
-    padding: 16px;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    transition: all 0.2s ease-in-out;
-    line-height: 24px;
-  }
-
-  .card-container .card:not(:last-child) {
-    margin-right: 0;
-  }
-
-  .card.card-small {
-    height: 16px;
-    width: 168px;
-  }
-
-  .card-container .card:not(.highlight-card) {
-    cursor: pointer;
-  }
-
-  .card-container .card:not(.highlight-card):hover {
-    transform: translateY(-3px);
-    box-shadow: 0 4px 17px rgba(0, 0, 0, 0.35);
-  }
-
-  .card-container .card:not(.highlight-card):hover .material-icons path {
-    fill: rgb(105, 103, 103);
-  }
-
-  .card.highlight-card {
-    background-color: #1976d2;
-    color: white;
-    font-weight: 600;
-    border: none;
-    width: auto;
-    min-width: 30%;
-    position: relative;
-  }
-
-  .card.card.highlight-card span {
-    margin-left: 60px;
-  }
-
-  svg#rocket {
-    width: 80px;
-    position: absolute;
-    left: -10px;
-    top: -24px;
-  }
-
-  svg#rocket-smoke {
-    height: calc(100vh - 95px);
-    position: absolute;
-    top: 10px;
-    right: 180px;
-    z-index: -10;
-  }
-
-  a,
-  a:visited,
-  a:hover {
-    color: #1976d2;
-    text-decoration: none;
-  }
-
-  a:hover {
-    color: #125699;
-  }
-
-  .terminal {
-    position: relative;
-    width: 80%;
-    max-width: 600px;
-    border-radius: 6px;
-    padding-top: 45px;
-    margin-top: 8px;
-    overflow: hidden;
-    background-color: rgb(15, 15, 16);
-  }
-
-  .terminal::before {
-    content: "\2022 \2022 \2022";
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 4px;
-    background: rgb(58, 58, 58);
-    color: #c2c3c4;
-    width: 100%;
-    font-size: 2rem;
-    line-height: 0;
-    padding: 14px 0;
-    text-indent: 4px;
-  }
-
-  .terminal pre {
-    font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;
-    color: white;
-    padding: 0 1rem 1rem;
-    margin: 0;
-  }
-
-  .circle-link {
-    height: 40px;
-    width: 40px;
-    border-radius: 40px;
-    margin: 8px;
-    background-color: white;
-    border: 1px solid #eeeeee;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-    transition: 1s ease-out;
-  }
-
-  .circle-link:hover {
-    transform: translateY(-0.25rem);
-    box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
-  }
-
-  footer {
-    margin-top: 8px;
-    display: flex;
-    align-items: center;
-    line-height: 20px;
-  }
-
-  footer a {
-    display: flex;
-    align-items: center;
-  }
-
-  .github-star-badge {
-    color: #24292e;
-    display: flex;
-    align-items: center;
-    font-size: 12px;
-    padding: 3px 10px;
-    border: 1px solid rgba(27,31,35,.2);
-    border-radius: 3px;
-    background-image: linear-gradient(-180deg,#fafbfc,#eff3f6 90%);
-    margin-left: 4px;
-    font-weight: 600;
-    font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
-  }
-
-  .github-star-badge:hover {
-    background-image: linear-gradient(-180deg,#f0f3f6,#e6ebf1 90%);
-    border-color: rgba(27,31,35,.35);
-    background-position: -.5em;
-  }
-
-  .github-star-badge .material-icons {
-    height: 16px;
-    width: 16px;
-    margin-right: 4px;
-  }
-
-  svg#clouds {
-    position: fixed;
-    bottom: -160px;
-    left: -230px;
-    z-index: -10;
-    width: 1920px;
-  }
+  <title>Windows 11 in html, css and javascript</title>
 
 
-  /* Responsive Styles */
-  @media screen and (max-width: 767px) {
+</head>
 
-    .card-container > *:not(.circle-link) ,
-    .terminal {
-      width: 100%;
-    }
+<body>
 
-    .card:not(.highlight-card) {
-      height: 16px;
-      margin: 8px 0;
-    }
 
-    .card.highlight-card span {
-      margin-left: 72px;
-    }
 
-    svg#rocket-smoke {
-      right: 120px;
-      transform: rotate(-5deg);
-    }
-  }
+  <div class="lock_screen">
+    <div class="time">
+      <span class="clock-time">7:08</span>
+      <span class="clock-ampm">PM</span>
+      <div class="local_time">Saturday, October 30</div>
+    </div>
+    <img class="user_circle_details" src="https://avatars.githubusercontent.com/u/91379432?v=4">
+    <span class="user_mete_data_name">DongHungFEng</span>
+    <div class="right_bottom_wifi_battery_indicator">
+      <i class='bx bx-wifi' style="color: #fff;"></i>
+      <img id="function_lock_screen"
+        src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Ui_icons/battery.png">
+      <!--<div class="battery_percent"></div>-->
+    </div>
 
-  @media screen and (max-width: 575px) {
-    svg#rocket-smoke {
-      display: none;
-      visibility: hidden;
-    }
-  }
-</style>
-
-<!-- Toolbar -->
-<div class="toolbar" role="banner">
-  <img
-    width="40"
-    alt="Angular Logo"
-    src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg=="
-  />
-  <span>Welcome</span>
-    <div class="spacer"></div>
-    <a aria-label="Angular on twitter" target="_blank" rel="noopener" href="https://twitter.com/angular" title="Twitter">
-      <svg id="twitter-logo" height="24" data-name="Logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
-        <rect width="400" height="400" fill="none"/>
-        <path d="M153.62,301.59c94.34,0,145.94-78.16,145.94-145.94,0-2.22,0-4.43-.15-6.63A104.36,104.36,0,0,0,325,122.47a102.38,102.38,0,0,1-29.46,8.07,51.47,51.47,0,0,0,22.55-28.37,102.79,102.79,0,0,1-32.57,12.45,51.34,51.34,0,0,0-87.41,46.78A145.62,145.62,0,0,1,92.4,107.81a51.33,51.33,0,0,0,15.88,68.47A50.91,50.91,0,0,1,85,169.86c0,.21,0,.43,0,.65a51.31,51.31,0,0,0,41.15,50.28,51.21,51.21,0,0,1-23.16.88,51.35,51.35,0,0,0,47.92,35.62,102.92,102.92,0,0,1-63.7,22A104.41,104.41,0,0,1,75,278.55a145.21,145.21,0,0,0,78.62,23" fill="#fff"/>
-      </svg>
-    </a>
-    <a aria-label="Angular on YouTube" target="_blank" rel="noopener" href="https://youtube.com/angular" title="YouTube">
-      <svg id="youtube-logo" height="24" width="24" data-name="Logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#fff">
-        <path d="M0 0h24v24H0V0z" fill="none"/>
-        <path d="M21.58 7.19c-.23-.86-.91-1.54-1.77-1.77C18.25 5 12 5 12 5s-6.25 0-7.81.42c-.86.23-1.54.91-1.77 1.77C2 8.75 2 12 2 12s0 3.25.42 4.81c.23.86.91 1.54 1.77 1.77C5.75 19 12 19 12 19s6.25 0 7.81-.42c.86-.23 1.54-.91 1.77-1.77C22 15.25 22 12 22 12s0-3.25-.42-4.81zM10 15V9l5.2 3-5.2 3z"/>
-      </svg>
-    </a>
-</div>
-
-<div class="content" role="main">
-
-  <!-- Highlight Card -->
-  <div class="card highlight-card card-small">
-
-    <svg id="rocket" xmlns="http://www.w3.org/2000/svg" width="101.678" height="101.678" viewBox="0 0 101.678 101.678">
-      <title>Rocket Ship</title>
-      <g id="Group_83" data-name="Group 83" transform="translate(-141 -696)">
-        <circle id="Ellipse_8" data-name="Ellipse 8" cx="50.839" cy="50.839" r="50.839" transform="translate(141 696)" fill="#dd0031"/>
-        <g id="Group_47" data-name="Group 47" transform="translate(165.185 720.185)">
-          <path id="Path_33" data-name="Path 33" d="M3.4,42.615a3.084,3.084,0,0,0,3.553,3.553,21.419,21.419,0,0,0,12.215-6.107L9.511,30.4A21.419,21.419,0,0,0,3.4,42.615Z" transform="translate(0.371 3.363)" fill="#fff"/>
-          <path id="Path_34" data-name="Path 34" d="M53.3,3.221A3.09,3.09,0,0,0,50.081,0,48.227,48.227,0,0,0,18.322,13.437c-6-1.666-14.991-1.221-18.322,7.218A33.892,33.892,0,0,1,9.439,25.1l-.333.666a3.013,3.013,0,0,0,.555,3.553L23.985,43.641a2.9,2.9,0,0,0,3.553.555l.666-.333A33.892,33.892,0,0,1,32.647,53.3c8.55-3.664,8.884-12.326,7.218-18.322A48.227,48.227,0,0,0,53.3,3.221ZM34.424,9.772a6.439,6.439,0,1,1,9.106,9.106,6.368,6.368,0,0,1-9.106,0A6.467,6.467,0,0,1,34.424,9.772Z" transform="translate(0 0.005)" fill="#fff"/>
-        </g>
-      </g>
+    <input class="lock_screen_password_input" type="text" placeholder="Password">
+    <svg class="arrow_left_inpass" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-right"
+      role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-flip="false" data-invert="false"
+      data-rounded="false" style="width: 14px; height: 14px; color: rgba(170, 170, 170, 0.6);">
+      <path fill="currentColor"
+        d="M190.5 66.9l22.2-22.2c9.4-9.4 24.6-9.4 33.9 0L441 239c9.4 9.4 9.4 24.6 0 33.9L246.6 467.3c-9.4 9.4-24.6 9.4-33.9 0l-22.2-22.2c-9.5-9.5-9.3-25 .4-34.3L311.4 296H24c-13.3 0-24-10.7-24-24v-32c0-13.3 10.7-24 24-24h287.4L190.9 101.2c-9.8-9.3-10-24.8-.4-34.3z">
+      </path>
     </svg>
-
-    <span>{{ title }} app is running!</span>
-
-    <svg id="rocket-smoke" xmlns="http://www.w3.org/2000/svg" width="516.119" height="1083.632" viewBox="0 0 516.119 1083.632">
-      <title>Rocket Ship Smoke</title>
-      <path id="Path_40" data-name="Path 40" d="M644.6,141S143.02,215.537,147.049,870.207s342.774,201.755,342.774,201.755S404.659,847.213,388.815,762.2c-27.116-145.51-11.551-384.124,271.9-609.1C671.15,139.365,644.6,141,644.6,141Z" transform="translate(-147.025 -140.939)" fill="#f5f5f5"/>
-    </svg>
-
-  </div>
-
-  <!-- Resources -->
-  <h2>Resources</h2>
-  <p>Here are some links to help you get started:</p>
-
-  <div class="card-container">
-    <a class="card" target="_blank" rel="noopener" href="https://angular.io/tutorial">
-      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z"/></svg>
-
-      <span>Learn Angular</span>
-
-      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>    </a>
-
-    <a class="card" target="_blank" rel="noopener" href="https://angular.io/cli">
-      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg>
-
-      <span>CLI Documentation</span>
-
-      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
-    </a>
-
-    <a class="card" target="_blank" rel="noopener" href="https://blog.angular.io/">
-      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M13.5.67s.74 2.65.74 4.8c0 2.06-1.35 3.73-3.41 3.73-2.07 0-3.63-1.67-3.63-3.73l.03-.36C5.21 7.51 4 10.62 4 14c0 4.42 3.58 8 8 8s8-3.58 8-8C20 8.61 17.41 3.8 13.5.67zM11.71 19c-1.78 0-3.22-1.4-3.22-3.14 0-1.62 1.05-2.76 2.81-3.12 1.77-.36 3.6-1.21 4.62-2.58.39 1.29.59 2.65.59 4.04 0 2.65-2.15 4.8-4.8 4.8z"/></svg>
-
-      <span>Angular Blog</span>
-
-      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
-    </a>
-
-    <a class="card" target="_blank" rel="noopener" href="https://angular.io/devtools/">
-      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><g><rect fill="none" height="24" width="24"/></g><g><g><path d="M14.73,13.31C15.52,12.24,16,10.93,16,9.5C16,5.91,13.09,3,9.5,3S3,5.91,3,9.5C3,13.09,5.91,16,9.5,16 c1.43,0,2.74-0.48,3.81-1.27L19.59,21L21,19.59L14.73,13.31z M9.5,14C7.01,14,5,11.99,5,9.5S7.01,5,9.5,5S14,7.01,14,9.5 S11.99,14,9.5,14z"/><polygon points="10.29,8.44 9.5,6 8.71,8.44 6.25,8.44 8.26,10.03 7.49,12.5 9.5,10.97 11.51,12.5 10.74,10.03 12.75,8.44"/></g></g></svg>
-      <span>Angular DevTools</span>
-
-      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
-    </a>
-
-  </div>
-
-  <!-- Next Steps -->
-  <h2>Next Steps</h2>
-  <p>What do you want to do next with your app?</p>
-
-  <input type="hidden" #selection>
-
-  <div class="card-container">
-    <div class="card card-small" (click)="selection.value = 'component'" tabindex="0">
-        <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
-
-      <span>New Component</span>
-    </div>
-
-    <div class="card card-small" (click)="selection.value = 'material'" tabindex="0">
-        <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
-
-      <span>Angular Material</span>
-    </div>
-
-    <div class="card card-small" (click)="selection.value = 'pwa'" tabindex="0">
-        <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
-
-      <span>Add PWA Support</span>
-    </div>
-
-    <div class="card card-small" (click)="selection.value = 'dependency'" tabindex="0">
-      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
-
-      <span>Add Dependency</span>
-    </div>
-
-    <div class="card card-small" (click)="selection.value = 'test'" tabindex="0">
-      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
-
-      <span>Run and Watch Tests</span>
-    </div>
-
-    <div class="card card-small" (click)="selection.value = 'build'" tabindex="0">
-      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
-
-      <span>Build for Production</span>
+    <div class="i_forgot_my_password">I forgot my password</div>
+    <div class="sign_in_options">Sign-in options</div>
+    <div class="sign_in_options_grid">
+      <img class="pinlock" src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/pinlock.png">
+      <img class="passkey" src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/passkey.png">
     </div>
   </div>
 
-  <!-- Terminal -->
-  <div class="terminal" [ngSwitch]="selection.value">
-      <pre *ngSwitchDefault>ng generate component xyz</pre>
-      <pre *ngSwitchCase="'material'">ng add @angular/material</pre>
-      <pre *ngSwitchCase="'pwa'">ng add @angular/pwa</pre>
-      <pre *ngSwitchCase="'dependency'">ng add _____</pre>
-      <pre *ngSwitchCase="'test'">ng test</pre>
-      <pre *ngSwitchCase="'build'">ng build</pre>
+  <div class="Brightness-Overlay">
+
   </div>
-
-  <!-- Links -->
-  <div class="card-container">
-    <a class="circle-link" title="Animations" href="https://angular.io/guide/animations" target="_blank" rel="noopener">
-      <svg id="Group_20" data-name="Group 20" xmlns="http://www.w3.org/2000/svg" width="21.813" height="23.453" viewBox="0 0 21.813 23.453">
-        <path id="Path_15" data-name="Path 15" d="M4099.584,972.736h0l-10.882,3.9,1.637,14.4,9.245,5.153,9.245-5.153,1.686-14.4Z" transform="translate(-4088.702 -972.736)" fill="#ffa726"/>
-        <path id="Path_16" data-name="Path 16" d="M4181.516,972.736v23.453l9.245-5.153,1.686-14.4Z" transform="translate(-4170.633 -972.736)" fill="#fb8c00"/>
-        <path id="Path_17" data-name="Path 17" d="M4137.529,1076.127l-7.7-3.723,4.417-2.721,7.753,3.723Z" transform="translate(-4125.003 -1058.315)" fill="#ffe0b2"/>
-        <path id="Path_18" data-name="Path 18" d="M4137.529,1051.705l-7.7-3.723,4.417-2.721,7.753,3.723Z" transform="translate(-4125.003 -1036.757)" fill="#fff3e0"/>
-        <path id="Path_19" data-name="Path 19" d="M4137.529,1027.283l-7.7-3.723,4.417-2.721,7.753,3.723Z" transform="translate(-4125.003 -1015.199)" fill="#fff"/>
-      </svg>
-    </a>
-
-    <a class="circle-link" title="CLI" href="https://cli.angular.io/" target="_blank" rel="noopener">
-      <svg xmlns="http://www.w3.org/2000/svg" width="21.762" height="23.447" viewBox="0 0 21.762 23.447">
-        <title>Angular CLI Logo</title>
-        <g id="Group_21" data-name="Group 21" transform="translate(0)">
-          <path id="Path_20" data-name="Path 20" d="M2660.313,313.618h0l-10.833,3.9,1.637,14.4,9.2,5.152,9.244-5.152,1.685-14.4Z" transform="translate(-2649.48 -313.618)" fill="#37474f"/>
-          <path id="Path_21" data-name="Path 21" d="M2741.883,313.618v23.447l9.244-5.152,1.685-14.4Z" transform="translate(-2731.05 -313.618)" fill="#263238"/>
-          <path id="Path_22" data-name="Path 22" d="M2692.293,379.169h11.724V368.618h-11.724Zm11.159-.6h-10.608v-9.345h10.621v9.345Z" transform="translate(-2687.274 -362.17)" fill="#fff"/>
-          <path id="Path_23" data-name="Path 23" d="M2709.331,393.688l.4.416,2.265-2.28-2.294-2.294-.4.4,1.893,1.893Z" transform="translate(-2702.289 -380.631)" fill="#fff"/>
-          <rect id="Rectangle_12" data-name="Rectangle 12" width="3.517" height="0.469" transform="translate(9.709 13.744)" fill="#fff"/>
-        </g>
-      </svg>
-    </a>
-
-    <a class="circle-link" title="Find a Local Meetup" href="https://www.meetup.com/find/?keywords=angular" target="_blank" rel="noopener">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24.607" height="23.447" viewBox="0 0 24.607 23.447">
-        <title>Meetup Logo</title>
-        <path id="logo--mSwarm" d="M21.221,14.95A4.393,4.393,0,0,1,17.6,19.281a4.452,4.452,0,0,1-.8.069c-.09,0-.125.035-.154.117a2.939,2.939,0,0,1-2.506,2.091,2.868,2.868,0,0,1-2.248-.624.168.168,0,0,0-.245-.005,3.926,3.926,0,0,1-2.589.741,4.015,4.015,0,0,1-3.7-3.347,2.7,2.7,0,0,1-.043-.38c0-.106-.042-.146-.143-.166a3.524,3.524,0,0,1-1.516-.69A3.623,3.623,0,0,1,2.23,14.557a3.66,3.66,0,0,1,1.077-3.085.138.138,0,0,0,.026-.2,3.348,3.348,0,0,1-.451-1.821,3.46,3.46,0,0,1,2.749-3.28.44.44,0,0,0,.355-.281,5.072,5.072,0,0,1,3.863-3,5.028,5.028,0,0,1,3.555.666.31.31,0,0,0,.271.03A4.5,4.5,0,0,1,18.3,4.7a4.4,4.4,0,0,1,1.334,2.751,3.658,3.658,0,0,1,.022.706.131.131,0,0,0,.1.157,2.432,2.432,0,0,1,1.574,1.645,2.464,2.464,0,0,1-.7,2.616c-.065.064-.051.1-.014.166A4.321,4.321,0,0,1,21.221,14.95ZM13.4,14.607a2.09,2.09,0,0,0,1.409,1.982,4.7,4.7,0,0,0,1.275.221,1.807,1.807,0,0,0,.9-.151.542.542,0,0,0,.321-.545.558.558,0,0,0-.359-.534,1.2,1.2,0,0,0-.254-.078c-.262-.047-.526-.086-.787-.138a.674.674,0,0,1-.617-.75,3.394,3.394,0,0,1,.218-1.109c.217-.658.509-1.286.79-1.918a15.609,15.609,0,0,0,.745-1.86,1.95,1.95,0,0,0,.06-1.073,1.286,1.286,0,0,0-1.051-1.033,1.977,1.977,0,0,0-1.521.2.339.339,0,0,1-.446-.042c-.1-.092-.2-.189-.307-.284a1.214,1.214,0,0,0-1.643-.061,7.563,7.563,0,0,1-.614.512A.588.588,0,0,1,10.883,8c-.215-.115-.437-.215-.659-.316a2.153,2.153,0,0,0-.695-.248A2.091,2.091,0,0,0,7.541,8.562a9.915,9.915,0,0,0-.405.986c-.559,1.545-1.015,3.123-1.487,4.7a1.528,1.528,0,0,0,.634,1.777,1.755,1.755,0,0,0,1.5.211,1.35,1.35,0,0,0,.824-.858c.543-1.281,1.032-2.584,1.55-3.875.142-.355.28-.712.432-1.064a.548.548,0,0,1,.851-.24.622.622,0,0,1,.185.539,2.161,2.161,0,0,1-.181.621c-.337.852-.68,1.7-1.018,2.552a2.564,2.564,0,0,0-.173.528.624.624,0,0,0,.333.71,1.073,1.073,0,0,0,.814.034,1.22,1.22,0,0,0,.657-.655q.758-1.488,1.511-2.978.35-.687.709-1.37a1.073,1.073,0,0,1,.357-.434.43.43,0,0,1,.463-.016.373.373,0,0,1,.153.387.7.7,0,0,1-.057.236c-.065.157-.127.316-.2.469-.42.883-.846,1.763-1.262,2.648A2.463,2.463,0,0,0,13.4,14.607Zm5.888,6.508a1.09,1.09,0,0,0-2.179.006,1.09,1.09,0,0,0,2.179-.006ZM1.028,12.139a1.038,1.038,0,1,0,.01-2.075,1.038,1.038,0,0,0-.01,2.075ZM13.782.528a1.027,1.027,0,1,0-.011,2.055A1.027,1.027,0,0,0,13.782.528ZM22.21,6.95a.882.882,0,0,0-1.763.011A.882.882,0,0,0,22.21,6.95ZM4.153,4.439a.785.785,0,1,0,.787-.78A.766.766,0,0,0,4.153,4.439Zm8.221,18.22a.676.676,0,1,0-.677.666A.671.671,0,0,0,12.374,22.658ZM22.872,12.2a.674.674,0,0,0-.665.665.656.656,0,0,0,.655.643.634.634,0,0,0,.655-.644A.654.654,0,0,0,22.872,12.2ZM7.171-.123A.546.546,0,0,0,6.613.43a.553.553,0,1,0,1.106,0A.539.539,0,0,0,7.171-.123ZM24.119,9.234a.507.507,0,0,0-.493.488.494.494,0,0,0,.494.494.48.48,0,0,0,.487-.483A.491.491,0,0,0,24.119,9.234Zm-19.454,9.7a.5.5,0,0,0-.488-.488.491.491,0,0,0-.487.5.483.483,0,0,0,.491.479A.49.49,0,0,0,4.665,18.936Z" transform="translate(0 0.123)" fill="#f64060"/>
-      </svg>
-    </a>
-
-    <a class="circle-link" title="Join the Conversation on Discord" href="https://discord.gg/angular" target="_blank" rel="noopener">
-      <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 245 240">
-        <title>Discord Logo</title>
-        <path d="M104.4 103.9c-5.7 0-10.2 5-10.2 11.1s4.6 11.1 10.2 11.1c5.7 0 10.2-5 10.2-11.1.1-6.1-4.5-11.1-10.2-11.1zM140.9 103.9c-5.7 0-10.2 5-10.2 11.1s4.6 11.1 10.2 11.1c5.7 0 10.2-5 10.2-11.1s-4.5-11.1-10.2-11.1z"/>
-        <path d="M189.5 20h-134C44.2 20 35 29.2 35 40.6v135.2c0 11.4 9.2 20.6 20.5 20.6h113.4l-5.3-18.5 12.8 11.9 12.1 11.2 21.5 19V40.6c0-11.4-9.2-20.6-20.5-20.6zm-38.6 130.6s-3.6-4.3-6.6-8.1c13.1-3.7 18.1-11.9 18.1-11.9-4.1 2.7-8 4.6-11.5 5.9-5 2.1-9.8 3.5-14.5 4.3-9.6 1.8-18.4 1.3-25.9-.1-5.7-1.1-10.6-2.7-14.7-4.3-2.3-.9-4.8-2-7.3-3.4-.3-.2-.6-.3-.9-.5-.2-.1-.3-.2-.4-.3-1.8-1-2.8-1.7-2.8-1.7s4.8 8 17.5 11.8c-3 3.8-6.7 8.3-6.7 8.3-22.1-.7-30.5-15.2-30.5-15.2 0-32.2 14.4-58.3 14.4-58.3 14.4-10.8 28.1-10.5 28.1-10.5l1 1.2c-18 5.2-26.3 13.1-26.3 13.1s2.2-1.2 5.9-2.9c10.7-4.7 19.2-6 22.7-6.3.6-.1 1.1-.2 1.7-.2 6.1-.8 13-1 20.2-.2 9.5 1.1 19.7 3.9 30.1 9.6 0 0-7.9-7.5-24.9-12.7l1.4-1.6s13.7-.3 28.1 10.5c0 0 14.4 26.1 14.4 58.3 0 0-8.5 14.5-30.6 15.2z"/>
-      </svg>
-    </a>
+  <div class="NightLightOverlay">
   </div>
+  <main>
+    <div class="water_mark">
+      <p class="bold">Windows 11 Pro browser Preview</p>
+      <p class="thin">DongHungFeng</p>
+    </div>
 
-  <!-- Footer -->
-  <footer>
-      Love Angular?&nbsp;
-      <a href="https://github.com/angular/angular" target="_blank" rel="noopener"> Give our repo a star.
-        <div class="github-star-badge">
-            <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-          Star
+
+    <div class="about_window">
+      <div class="about_window_header">
+        About
+      </div>
+      <div class="about_main_content">
+        <img src="assets/images/about-logo.png">
+        <div class="main_text">Microsoft Windows 11
+          <br>
+          version 21H2 (OS Build 10.0.22000)
+          <br>
+          © donghungfeng. All rights reserved.
+          <br>
+          <br>
+          This project is <mark>NOT AFFILATED WITH MICROSOFT</mark>
+          This project is a open source project all Microsoft <mark>products showed in this website are licensed under
+            Microsoft's rights</mark>
+          <br>
+          <br>
+          Contact with me: donghung.feng@gmail.com
+          <br>
+          <br>
+          The site entirely made with out frame works and write it in html,css and js
+          if you find any feature or bugs please make make an<a
+            href="https://github.com/donghungfeng" target="_blank"> issue</a> or a <a
+            href="https://github.com/donghungfeng" target="_blank">pull request</a> on <a
+            href="https://github.com/donghungfeng" target="_blank">Github</a>
         </div>
-      </a>
-      <a href="https://github.com/angular/angular" target="_blank" rel="noopener">
-        <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" fill="#1976d2"/><path d="M0 0h24v24H0z" fill="none"/></svg>
-      </a>
-  </footer>
+        <button class="ok_button">
+          Ok
+        </button>
+      </div>
+    </div>
 
-  <svg id="clouds" xmlns="http://www.w3.org/2000/svg" width="2611.084" height="485.677" viewBox="0 0 2611.084 485.677">
-    <title>Gray Clouds Background</title>
-    <path id="Path_39" data-name="Path 39" d="M2379.709,863.793c10-93-77-171-168-149-52-114-225-105-264,15-75,3-140,59-152,133-30,2.83-66.725,9.829-93.5,26.25-26.771-16.421-63.5-23.42-93.5-26.25-12-74-77-130-152-133-39-120-212-129-264-15-54.084-13.075-106.753,9.173-138.488,48.9-31.734-39.726-84.4-61.974-138.487-48.9-52-114-225-105-264,15a162.027,162.027,0,0,0-103.147,43.044c-30.633-45.365-87.1-72.091-145.206-58.044-52-114-225-105-264,15-75,3-140,59-152,133-53,5-127,23-130,83-2,42,35,72,70,86,49,20,106,18,157,5a165.625,165.625,0,0,0,120,0c47,94,178,113,251,33,61.112,8.015,113.854-5.72,150.492-29.764a165.62,165.62,0,0,0,110.861-3.236c47,94,178,113,251,33,31.385,4.116,60.563,2.495,86.487-3.311,25.924,5.806,55.1,7.427,86.488,3.311,73,80,204,61,251-33a165.625,165.625,0,0,0,120,0c51,13,108,15,157-5a147.188,147.188,0,0,0,33.5-18.694,147.217,147.217,0,0,0,33.5,18.694c49,20,106,18,157,5a165.625,165.625,0,0,0,120,0c47,94,178,113,251,33C2446.709,1093.793,2554.709,922.793,2379.709,863.793Z" transform="translate(142.69 -634.312)" fill="#eee"/>
-  </svg>
+    <div class="to_center">
+      <div class="Search_box_container">
+        <input type="text" placeholder="Search something ...">
+        <img id="search_icon"
+          src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/search_menu_search.png">
+        <div class="search_navigation_header">
+          <div id="option_selected" class="search_navigation_header_option">
+            <p>All</p>
+          </div>
+          <div id="option1" class="search_navigation_header_option">
+            <p>Apps</p>
+          </div>
+          <div id="option2" class="search_navigation_header_option">
+            <p>Documents</p>
+          </div>
+          <div id="option3" class="search_navigation_header_option">
+            <p>Web</p>
+          </div>
+          <div id="option4" class="search_navigation_header_option">
+            <p>More</p>
+          </div>
+        </div>
 
+        <div class="top_apps">
+          <p>Top apps</p>
+        </div>
+        <div class="flex_grid_top_apps">
+          <div class="top_app_column">
+            <img class="top_app_img"
+              src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/explorer.png">
+            <p>File explorer</p>
+          </div>
+          <div class="top_app_column">
+            <img class="top_app_img"
+              src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/terminal.png">
+            <p>Terminal</p>
+          </div>
+          <div class="top_app_column">
+            <img class="top_app_img"
+              src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/edge.png">
+            <p>Edge</p>
+          </div>
+          <div class="top_app_column">
+            <img class="top_app_img"
+              src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/photos.png">
+            <p>Photos</p>
+          </div>
+          <div class="top_app_column">
+            <img class="top_app_img"
+              src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/access.png">
+            <p>Aceess</p>
+          </div>
+        </div>
+        <div class="recent">
+          <p>Recent</p>
+        </div>
+
+        <div class="recent_box">
+          <div class="recent_box_item">
+            <img src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/terminal.png">
+            <p>Terminal</p>
+          </div>
+          <div class="recent_box_item">
+            <img src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/calendar.png">
+            <p>Calendar</p>
+          </div>
+          <div class="recent_box_item">
+            <img src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/code.png">
+            <p>VScode</p>
+          </div>
+          <div class="recent_box_item">
+            <img src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/camera.png">
+            <p>Camera</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="widgets-container">
+      <!--<div class="clock1">
+  <span  class="clock-time1">20:56</span>
+  <span  class="clock-ampm1">PM</span>
+   </div>-->
+
+      <div class="Search-Bar1">
+        <i class='bx bx-search bx-rotate-90'></i>
+        <input type="text" placeholder="Type to here search the web">
+
+      </div>
+
+      <div class="User-Accunt-Widgets">
+        <img class="User-Circle" src="https://avatars.githubusercontent.com/u/91379432?v=4">
+      </div>
+      <div class="News-column">
+        <div class="Weather-Widget">
+          <p class="WEATHER">WEATHER</p>
+          <div class="Dots-widget">
+            <i class='bx bx-dots-horizontal-rounded'></i>
+          </div>
+          <div class="location">
+            <i class="fas fa-map-marker-alt"></i> Budapest, Hungary
+          </div>
+          <div class="weather_info">
+            <img src="https://www.metaweather.com/static/img/weather/png/64/hc.png">
+            <div class="temp_main"> 47 <p class="temp_unit">°C</p>
+            </div>
+            <div class="left_unit">
+              Heavy Cloud<br>
+              <i class="fas fa-tint"></i> 71%
+              <i class="fas fa-wind"></i>3
+            </div>
+          </div>
+          <div class="week_days_content_grid">
+            <div class="week_days">
+              <div class="week_days_header">
+                Today
+              </div>
+              <img id="weather_icon" src="https://www.metaweather.com/static/img/weather/png/64/hc.png">
+              <div class="temp">
+                8°C
+                <br>
+                2°C
+              </div>
+            </div>
+            <div class="week_days">
+              <div class="week_days_header">
+                Sun
+              </div>
+              <img id="weather_icon" src="https://www.metaweather.com/static/img/weather/png/64/hc.png">
+              <div class="temp">
+                12°C
+                <br>
+                6°C
+              </div>
+            </div>
+            <div class="week_days">
+              <div class="week_days_header">
+                Mon
+              </div>
+              <img id="weather_icon" src="https://www.metaweather.com/static/img/weather/png/64/lc.png">
+              <div class="temp">
+                12°C
+                <br>
+                6°C
+              </div>
+            </div>
+            <div class="week_days">
+              <div class="week_days_header">
+                Thu
+              </div>
+              <img id="weather_icon" src="https://www.metaweather.com/static/img/weather/png/64/lc.png">
+              <div class="temp">
+                11°C
+                <br>
+                4°C
+              </div>
+            </div>
+          </div>
+          <div class="See_full_forecast">
+            <p>See full forecast</p>
+          </div>
+        </div>
+        <div class="Sugessted-infos">
+          <div class="Dots-widget1">
+            <i class='bx bx-dots-horizontal-rounded'></i>
+          </div>
+        </div>
+        <div class="Sport-News-Widget">
+          <div class="Dots-widget2">
+            <i class='bx bx-dots-horizontal-rounded'></i>
+          </div>
+        </div>
+        <div class="Photos-Widget">
+          <div class="Photos-Widget-header">
+
+            <img
+              src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Ui_icons/287-2879916_microsoft-onedrive-icon-onedrive-logo-png-transparent-png%20(3).png">
+            <p>Photos</p>
+            <div class="Dots-widget3">
+              <i class='bx bx-dots-horizontal-rounded'></i>
+            </div>
+          </div>
+        </div>
+
+        <button class="Add-widget-button">Add widget</button>
+        <div class="Top-Stories">
+          <div class="Top-Stories-header">
+            <p>TOP STORIES</p>
+          </div>
+          <div class="stories-grid">
+            <div class="Story-Card">
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="xdk">
+      <div class="Window" id="setting">
+        <div class="center_it">
+
+        </div>
+        <div class="resizer bottom"></div>
+        <div class="resizer right"></div>
+        <div class="resizer left"></div>
+        <div class="resizer bottom_right"></div>
+        <div class="resizer top"></div>
+        <div class="resizer bottom_left"></div>
+        <div class="resizer top_left"></div>
+        <!--<input id="text_area" type="text">-->
+        <!-- <iframe src="https://www.photopea.com"></iframe>-->
+        <!--<iframe src=""></iframe>-->
+        <!-- <iframe src=" https://www.google.com/webhp?igu=1"></iframe>-->
+        <!-- <iframe src="https://www.wikipedia.org"></iframe>-->
+        <!--<iframe src="https://vscode.dev/"></iframe>-->
+        <!--<iframe src="https://venge.io"></iframe>-->
+        <!--<iframe src="https://win11-settings.netlify.app/system"></iframe>-->
+        <!--<iframe src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/apps/camera/camera.html"></iframe>-->
+        <div class="Window-header">
+          <img class="app-img"
+            src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/settings.png">
+          <p>Settings</p>
+          <div class="close-section">
+            <img class=" bx-minus"
+              src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Ui_icons/minimize.png">
+            <img onclick="click()" onmouseover="onhover()" onmouseout="onhover()" class="bx-square"
+              src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Ui_icons/maximize.png">
+            <div onmouseover="onhover()" onmouseout="onhover()" class="multi_task_box">
+              <div class="multi_task_box_column">
+                <div class="column-left"></div>
+                <div class="column-right"></div>
+              </div>
+              <div class="multi_task_box_column">
+                <div class="column-left1"></div>
+                <div class="column-right1"></div>
+              </div>
+              <div class="multi_task_box_column">
+                <div class="column-left2"></div>
+                <div class="column-left2_center_item"></div>
+                <div class="column-right2"></div>
+              </div>
+              <div class="multi_task_box_column">
+                <div class="column-left3"></div>
+                <div class="column-right3-top"></div>
+                <div class="column-right3-bottom"></div>
+              </div>
+              <div class="multi_task_box_column">
+                <div class="column-left4-top"></div>
+                <div class="column-left4-bottom"></div>
+                <div class="column-right4-top"></div>
+                <div class="column-right4-bottom"></div>
+              </div>
+              <div class="multi_task_box_column">
+                <div class="column-left5"></div>
+                <div class="column-left5_center_item"></div>
+                <div class="column-right5"></div>
+              </div>
+            </div>
+            <img class=" bx-x"
+              src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Ui_icons/close.png">
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!--Store window-->
+    <div id="store" class="Window" style="display:none">
+      <div class="center_it">
+        <iframe src="https://test-ioc.vncare.vn/" frameborder="0"></iframe>
+      </div>
+      <div class="resizer1 bottom"></div>
+      <div class="resizer1 right"></div>
+      <div class="resizer1 left"></div>
+      <div class="resizer1 bottom_right"></div>
+      <div class="resizer1 top"></div>
+      <div class="resizer1 bottom_left"></div>
+      <div class="resizer1 top_left"></div>
+      <!--<input id="text_area" type="text">-->
+      <!-- <iframe src="https://www.photopea.com"></iframe>-->
+      <!--<iframe src=""></iframe>-->
+      <!-- <iframe src=" https://www.google.com/webhp?igu=1"></iframe>-->
+      <!-- <iframe src="https://www.wikipedia.org"></iframe>-->
+      <!--<iframe src="https://vscode.dev/"></iframe>-->
+      <!--<iframe src="https://venge.io"></iframe>-->
+      <!--<iframe src="https://win11-settings.netlify.app/system"></iframe>-->
+      <!--<iframe src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/apps/camera/camera.html"></iframe>-->
+      <div id="store_header" (click)="headerQLDH()" class="Window-header" >
+        <img class="app-img"
+          src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/Microsoft_Store_2021.png">
+        <p>IOC</p>
+        <div class="close-section">
+          <img id="bxminus" class=" bx-minus"
+            src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Ui_icons/minimize.png">
+          <img onclick="click()" onmouseover="onhover4()" onmouseout="onhover4()" class="bx-square" id="square1"
+            src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Ui_icons/maximize.png">
+          <div onmouseover="onhover4()" onmouseout="onhover4()" id="multi_task_box" class="multi_task_box">
+            <div class="multi_task_box_column">
+              <div class="column-left" (click)="resizeQLHD('addleft50')"></div>
+              <div class="column-right" (click)="resizeQLHD('addright50')"></div>
+            </div>
+            <div class="multi_task_box_column">
+              <div class="column-left1" (click)="resizeQLHD('addleft75')"></div>
+              <div class="column-right1" (click)="resizeQLHD('addright25')"></div>
+            </div>
+            <div class="multi_task_box_column">
+              <div class="column-left2" (click)="resizeQLHD('addleft33')"></div>
+              <div class="column-left2_center_item" (click)="resizeQLHD('addcenter33')"></div>
+              <div class="column-right2" (click)="resizeQLHD('addright33')"></div>
+            </div>
+            <div class="multi_task_box_column">
+              <div class="column-left3" (click)="resizeQLHD('addleft33')"></div>
+              <div class="column-right3-top" (click)="resizeQLHD('addrighttop')"></div>
+              <div class="column-right3-bottom" (click)="resizeQLHD('addrightbottom')"></div>
+            </div>
+            <div class="multi_task_box_column">
+              <div class="column-left4-top" (click)="resizeQLHD('addlefttop')"></div>
+              <div class="column-left4-bottom" (click)="resizeQLHD('addrighttop')"></div>
+              <div class="column-right4-top" (click)="resizeQLHD('addleftbottom')"></div>
+              <div class="column-right4-bottom" (click)="resizeQLHD('addrightbottom')"></div>
+            </div>
+            <div class="multi_task_box_column">
+              <div class="column-left5" (click)="resizeQLHD('addleft50')"></div>
+              <div class="column-left5_center_item" (click)="resizeQLHD('addcenter50')"></div>
+              <div class="column-right5" (click)="resizeQLHD('addright25')"></div>
+            </div>
+          </div>
+          <img id="store_close" class=" bx-x"
+            src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Ui_icons/close.png">
+        </div>
+      </div>
+    </div>
+
+
+    <!--Store window-->
+    <div id="emr" class="Window">
+      <div class="center_it" id="emr_content" >
+        MERRRR
+      </div>
+      <div class="resizer1 bottom"></div>
+      <div class="resizer1 right"></div>
+      <div class="resizer1 left"></div>
+      <div class="resizer1 bottom_right"></div>
+      <div class="resizer1 top"></div>
+      <div class="resizer1 bottom_left"></div>
+      <div class="resizer1 top_left"></div>
+      <!--<input id="text_area" type="text">-->
+      <!-- <iframe src="https://www.photopea.com"></iframe>-->
+      <!--<iframe src=""></iframe>-->
+      <!-- <iframe src=" https://www.google.com/webhp?igu=1"></iframe>-->
+      <!-- <iframe src="https://www.wikipedia.org"></iframe>-->
+      <!--<iframe src="https://vscode.dev/"></iframe>-->
+      <!--<iframe src="https://venge.io"></iframe>-->
+      <!--<iframe src="https://win11-settings.netlify.app/system"></iframe>-->
+      <!--<iframe src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/apps/camera/camera.html"></iframe>-->
+      <div id="emr_header" class="Window-header" (click)="header()">
+        <img class="app-img"
+          src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/Microsoft_Store_2021.png">
+        <p>EMR</p>
+        <div class="close-section">
+          <img id="bxminusemr" class=" bx-minus" (click)="minus()"
+            src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Ui_icons/minimize.png">
+          <img (click)="small()" onmouseover="onhover5()" onmouseout="onhover5()" class="bx-square" id="square2"
+            src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Ui_icons/maximize.png">
+          <div onmouseover="onhover5()" onmouseout="onhover5()" id="multi_task_box_emr" class="multi_task_box">
+            <div class="multi_task_box_column">
+              <div class="column-left" (click)="resize('addleft50')"></div>
+              <div class="column-right" (click)="resize('addright50')"></div>
+            </div>
+            <div class="multi_task_box_column">
+              <div class="column-left1" (click)="resize('addleft75')"></div>
+              <div class="column-right1" (click)="resize('addright25')"></div>
+            </div>
+            <div class="multi_task_box_column">
+              <div class="column-left2" (click)="resize('addleft33')"></div>
+              <div class="column-left2_center_item" (click)="resize('addcenter33')"></div>
+              <div class="column-right2" (click)="resize('addright33')"></div>
+            </div>
+            <div class="multi_task_box_column">
+              <div class="column-left3" (click)="resize('addleft33')"></div>
+              <div class="column-right3-top" (click)="resize('addrighttop')"></div>
+              <div class="column-right3-bottom" (click)="resize('addrightbottom')"></div>
+            </div>
+            <div class="multi_task_box_column">
+              <div class="column-left4-top" (click)="resize('addlefttop')"></div>
+              <div class="column-left4-bottom" (click)="resize('addrighttop')"></div>
+              <div class="column-right4-top" (click)="resize('addleftbottom')"></div>
+              <div class="column-right4-bottom" (click)="resize('addrightbottom')"></div>
+            </div>
+            <div class="multi_task_box_column">
+              <div class="column-left5" (click)="resize('addleft50')"></div>
+              <div class="column-left5_center_item" (click)="resize('addcenter50')"></div>
+              <div class="column-right5" (click)="resize('addright25')"></div>
+            </div>
+          </div>
+          <img id="emr_close" class=" bx-x" (click)="close()"
+            src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Ui_icons/close.png">
+        </div>
+      </div>
+    </div>
+
+
+    <div class="Desktop-apps-container">
+      <div class="Desktop-App">
+        <img id="Recycle-bin" src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/bin0.png">
+        <p>Recycle<br> bin</p>
+
+      </div>
+      <div class="Desktop-App">
+        <img id="User-details"
+          src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/userDir.png">
+        <p>My Computer</p>
+      </div>
+      <div class="Desktop-App">
+        <img id="User-details"
+          src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/explorer.png">
+        <p>File Explorer</p>
+      </div>
+      <div class="Desktop-App">
+        <img id="qldh_app"
+          src="assets/images/icon_qldh.png" width="45">
+        <p>QLDH</p>
+      </div>
+      <div class="Desktop-App">
+        <img id="User-details"
+          src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/edge.png">
+        <p>Edge</p>
+      </div>
+      <div class="Desktop-App">
+        <img id="User-details"
+          src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/spotify.png">
+        <p> Spotify</p>
+      </div>
+      <div class="Desktop-App">
+        <a href="https://github.com/RedEdge967/win11-web" target="_blank"><img id="User-details"
+            src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/github.png"></a>
+        <p>Github</p>
+      </div>
+      <div class="Desktop-App">
+        <img id="emr_app"
+          src="assets/images/icon_emr.png">
+        <p> EMR</p>
+      </div>
+    </div>
+    <div id="context-menu">
+      <div id="menu_opt_view" class="item">
+        <i class='bx bx-grid-alt'></i> View
+      </div>
+      <div id="menu_opt_sort_by" class="item">
+        <svg viewBox="0 0 416 330" data-flip="false" data-invert="false" data-rounded="false"
+          style="width: 16px; height: 16px;">
+          <path stroke="#4cc2ff" fill="currentColor"
+            d="M124 1h8l6 2 4 3 106 107 4 8v9l-2 5-5 6-8 4h-9l-8-4-71-71-1 144-1 1v81q-2 8-8 12l-6 3h-11q-8-3-12-8l-2-3-1-3v-5l-1-1V133l1-1V70l-69 69-3 4-8 4H17l-10-5v-1l-5-7-1-8q2-1 1-5l3-5L116 5l8-4z">
+          </path>
+          <path fill="#4cc2ff" stroke="var(--deafult_txt_clr)"
+            d="M284 17h12q7 3 11 9l3 6 1 226 70-71 9-5h12l5 2 7 8 2 4v14l-3 6-110 110-5 3q-4-1-4 1h-9l-7-3-4-3-108-107-4-8v-11l3-7 6-6 6-3h13l6 3 72 72V33l2-5 6-7 8-4z">
+          </path>
+        </svg> Sort By
+      </div>
+      <div id="menu_opt_refresh" class="item">
+        <svg viewBox="0 0 64 64" data-flip="false" data-invert="false" data-rounded="false"
+          style="width: 16px; height: 16px;">
+          <path stroke="currentColor" fill="currentColor"
+            d="M52.36 2.42c1.13-.78 3.1.11 3.01 1.58.16 4.63.24 9.29-.06 13.92-1.33 1.78-3.92 1.84-5.83 2.7-2.86.88-5.63 2.05-8.55 2.73-2.24.82-3.57-2.75-1.56-3.76 3.12-1.45 6.55-2.08 9.7-3.46-4.53-5.47-12.03-8.07-19.02-7.52-7.45.53-14.44 4.97-18.24 11.38-3.59 5.9-4.28 13.42-1.95 19.9 2.06 5.83 6.52 10.78 12.13 13.38 6.52 3.08 14.48 2.94 20.86-.43 6.41-3.32 11.14-9.75 12.27-16.9.69-3.14-.13-6.37.28-9.52 1.08-1 2.2-1.08 3.38-.25.99 1.78.87 3.87.92 5.83.09 8.42-4.09 16.75-10.83 21.79-5.85 4.49-13.59 6.43-20.87 5.25-9.43-1.37-17.82-8.13-21.22-17.02-3.85-9.35-1.81-20.75 4.95-28.25C18.12 6.4 28.59 2.98 38.11 5.12c4.88.92 9.11 3.7 13.03 6.61.17-2.8-.15-5.63.26-8.41l.96-.9z">
+          </path>
+        </svg>Refresh
+      </div>
+
+
+
+      <div id="menu_opt_new" class="item">
+        <svg viewBox="0 0 500 500" data-flip="false" data-invert="false" data-rounded="false"
+          style="width: 16px; height: 16px;">
+          <path fill="#4cc2ff" stroke="#fff"
+            d="M245 151h11q4 2 7 6l3 6v71h72q6 2 9 7l2 4v11l-5 7-6 3h-72v72q-2 6-6 9l-4 2h-11l-8-5-3-6v-72h-71q-7-2-10-6l-2-4v-11q2-5 6-8l6-3h71v-71q2-7 7-10l4-2z">
+          </path>
+          <path stroke="currentColor" fill="currentColor"
+            d="M249 26q3-1 4 1h19l1 1h7l1 1h6l6 2h5l1 1 11 2 4 2h3l6 3 13 4 21 10 21 13 17 13 17 17 17 20 11 16 5 10 2 2 12 26 6 18v3l2 4 1 8 1 1v4l1 1v4l1 1 1 14 1 1v19q2 0 1 4l-1 1v18l-1 1v8l-1 1v6l-1 1-2 14-1 1v3l-2 4v3l-6 18-5 10v2l-7 14-13 21-13 17-16 17-20 17-16 11-10 5-2 2-26 12-21 7h-3l-5 2h-4l-1 1h-4l-1 1h-4l-1 1-14 1-1 1h-19q-1 2-4 1l-1-1h-19l-1-1h-7l-1-1h-6l-1-1-14-2-1-1-10-2-18-6-3-2h-2l-21-10-21-13-17-13-17-15-18-21-11-16-5-10-2-2-10-21-5-16-2-3-1-7-3-8-2-14-1-1-1-14-1-1v-19q-2-1-1-4l1-1v-19l1-1v-7l1-1v-6l1-1 2-14 4-12v-3l2-3 3-11 5-10v-2l7-14 13-21 13-17 16-17 21-18 16-11 10-5 2-2 21-10 16-5 3-2 7-1 8-3h4l1-1h4l6-2h6l1-1h7l1-1h19l1-1zm-13 31l-1 1h-9l-1 1h-6l-1 1h-4l-1 1h-4l-9 3h-3l-15 5-3 2h-2l-7 4h-2q-31 15-53 37-25 24-41 58v2l-5 10-5 15-2 11-1 1v4l-1 1v4l-1 1v6l-1 1v9l-1 1v29l1 1v9l1 1v6l1 1v4l1 1v4l3 9v3l5 15 5 10v2l10 19q12 19 28 36 23 24 56 39h2l7 4h2l3 2 15 5 11 2 1 1h4l1 1 12 1 1 1h8l1 1h29l1-1 15-1 1-1h5l1-1h4l9-3h3l15-5 24-11 10-6q17-11 32-25l13-14 10-13 12-19 5-10v-2l4-7v-2l2-3 5-15 2-11 1-1v-4l1-1 1-12 1-1v-9l1-1v-28l-1-1-1-15-1-1v-5l-1-1v-4l-3-9v-3l-5-15-11-24-6-10q-11-19-26-33-17-18-38-31l-19-10h-2l-10-5-15-5-11-2-1-1h-4l-1-1h-4l-1-1h-6l-1-1h-9l-1-1h-29z">
+          </path>
+        </svg> New
+      </div>
+
+      <div class="item">
+        <svg viewBox="0 0 500 500" data-flip="false" data-invert="false" data-rounded="false"
+          style="width: 16px; height: 16px;">
+          <path stroke="currentColor" fill="currentColor"
+            d="M243.5 37h210l18 6L485 53.5l6 8 5 10 3 9v10l1 1v255l-1 1v10l-3 9-5 10-8.5 10.5-8 6-10 5-6 1-1 1h-4l-1 1H345v62h46.5q6.8 2.3 10.5 7.5l3 8v5l-3 7-4.5 4.5-6 3h-258l-5-2-5.5-5.5-3-7v-7l5.5-9.5 8-4H180v-62H71.5l-1-1-8-1-9-4-9-6-5.5-5.5-10-16-3-9v-6l-1-1v-92l.5-.5 4 4 12 8 18.5 9.5v70l3 7 5.5 5.5 5 2h378q6.8-2.3 10.5-7.5l3-8v-261l-3-8-5.5-5.5-5-2h-188l-1.5-1.5-6-14-12-18-.5-2.5zM214 401v62h96v-62h-96z">
+          </path>
+          <path fill="#4cc2ff" stroke="#fff"
+            d="M105.5 0h28l1 1h6.5q-.8 2.6 1 3.5v4l1 1v3l1 1v3l1 1v3l2 6 7 12 6.5 6.5 7 5 12 5q4-1 5 1h12l1-1h4l4-2h3l7-3h3L230 66.5l6 12 3 10-15 15-7 12-1 6-1 1v4l-1 1v13l1 1v4l3 9 4 7 17 18-8 20-12.5 18.5-9-3h-3l-4-2h-3l-1-1h-16l-14 5-12.5 9.5-5 7-5 10v3l-3 9-1 7-1 1v3.5h-8.5l-1 1h-24l-1-1H99l-1-2.5v-3l-1-1v-3l-1-1-1-8-3-9-6-10-8.5-8.5-13-7h-3l-5-2h-16l-4 2h-3l-12 4L11 203.5l-7-14-1-5-2-3v-3l12-11 7-10 3-7 1-6 1-1v-4l1-1v-9l-1-1-1-9-5-11q-7.4-11.6-18-20v-2l10-22 9-13V50l7.5 1 7 3 8 1 1 1h11q1.3-2.3 6-1l10-5h2L85 39.5l7-11 3-9v-3l1-1v-4l2-5v-4L99.5 1q4.8 1.3 6-1zm8.5 98l-6 2-9 5-9 10-5 12v14q2 0 1 4l4 9 3 4 5 4 8 5 6 2h5l1 1 14-2 8-4 4-4h1v-1q5-5 8-12l1-7 1-1v-9q-2-1-1-5l-2-6-6-9q-5-7-13-10l-6-2h-13z">
+          </path>
+        </svg> Display Settings
+      </div>
+      <div class="item">
+        <svg viewBox="0 0 500 500" data-flip="false" data-invert="false" data-rounded="false"
+          style="width: 16px; height: 16px;">
+          <path stroke="currentColor" fill="currentColor"
+            d="M449.95 39.46c3.99-.83 8.16-1.78 12.22-.8 5.49 1.38 11.18 3.89 14.17 8.98 4.85 7.83 3.75 17.6 1.21 26.02-6.16 20.19-17.58 38.2-29.21 55.62-24.35 35.07-51.89 67.84-80.51 99.44-3.08 4.23-7.21 7.53-10.43 11.64-3.64 4.69-8.34 8.4-12.08 12.99-4.88 6.06-10.81 11.15-16 16.92-2.33 3-4.95 5.75-7.66 8.4l-44.02 44.03c-8.61 8.78-18.19 16.49-27.16 24.88-12.11 9.74-24.12 20.08-38.52 26.3-2.15 1.28-4.63.58-6.94.4.05-3.33.3-6.75-.71-9.98l-.53-2.66-1.03-3.1c-1.1-2.26-2.19-4.53-3.46-6.7 1.1-1.95 2.21-4.04 4.25-5.17 13.79-8.14 25.98-18.66 37.86-29.32 6.1-6.6 13.33-11.98 19.52-18.48 8.16-7.52 15.84-15.52 23.63-23.43 10.14-10.81 21.16-20.79 30.83-32.05 10.28-10.1 19.67-21.02 29.49-31.54 26.94-30.26 53.17-61.26 76.78-94.21 9.24-13.65 18.54-27.33 25.97-42.06.92-2.06 1.64-4.21 2.39-6.34-10.03 2.88-18.56 9.14-27.41 14.43-39.57 25.13-75.24 55.75-110.49 86.49-5.51 5.49-11.55 10.4-17.09 15.85-5.25 4.07-9.53 9.2-14.76 13.29-7.87 7.11-14.84 15.18-23.05 21.92l-37.53 37.42c-14.75 16.31-30.44 31.96-42.75 50.31-2.07 3.03-3.51 6.52-6.08 9.19-1.73.61-3.57.73-5.37.94-.21-.07-.63-.23-.84-.31l-4.25-1.56-1.75-.47-3.97-1.17c-3.67-.79-7.61-1.12-11.2.17-.1-4.72 2.12-9 4.1-13.14 9.86-18.08 23.91-33.32 37.35-48.73 5.05-5.24 10.48-10.13 15.01-15.85l28-28.13c9.93-8.4 18.6-18.15 28.14-26.96 5.48-4.09 9.69-9.58 15.09-13.75 4.6-3.76 8.31-8.48 13.09-12.03 39.79-35.51 80.45-70.53 125.54-99.3 12.57-7.67 25.63-15.21 40.16-18.39z">
+          </path>
+          <path fill="#4cc2ff" stroke="#fff"
+            d="M143.47 315.74c3.59-1.29 7.53-.96 11.2-.17l3.97 1.17 1.75.47 4.25 1.56.84.31c3.41 2.71 7.71 4.54 9.98 8.45 4.85 3.76 8.96 8.4 13.18 12.84.65 1.31 1.67 2.33 2.98 2.99 2.91 2.47 5.74 5.14 7.67 8.48 1.27 2.17 2.36 4.44 3.46 6.7l1.03 3.1.53 2.66c1.01 3.23.76 6.65.71 9.98l-.94 2.26c-.35 2.29.64 5.01-.94 6.97-.26 1.66.25 3.61-.97 5-.21 1.34-.07 2.81-.89 3.99-.25 1.02-.58 2.02-1 3-.33 1.77-1.17 3.37-2.03 4.94-.42 2.22-1.55 4.18-2.56 6.17-.69 1.32-1.34 2.67-1.95 4.04-2.11 3.81-4.94 7.17-7.02 11-2.89 2.54-4.53 6.13-7.48 8.61-3.03 2.59-5.29 6.17-8.89 8.02l-3.73 3.44c-2.52 1.34-4.77 3.1-7.17 4.62l-2.08.86c-1.96 1.13-3.84 2.4-5.75 3.61-1.38.54-2.75 1.08-4.19 1.42l-1.99 1.06c-1.69.6-3.38 1.18-4.99 1.95-.96.42-1.94.77-2.95 1.05a45.67 45.67 0 0 1-2.99 1.01c-1.51.93-3.32.65-4.99.82-1.1 1.01-2.66.81-4.01 1.08-1.77 1.24-3.99.67-5.99.89-3.91 2.05-8.73.31-13.01.99-1.37 1.27-3.71 1.42-5.03-.01-3.92-.66-8.49 1.08-11.99-.99-1.99-.29-4.37.53-6-.96-1.67-.25-3.62.28-4.99-.95-1.35-.22-2.84-.06-4-.91-1.03-.24-2.03-.56-3-.98-1.03-.25-2.03-.58-3-1-1.02-.26-2.02-.58-2.99-.98-1.77-.36-3.37-1.19-4.95-2.03-2.51-.51-4.72-1.84-6.96-3.01l-2.05-.93c-1.63-1.04-3.21-2.17-4.94-3.05-3.56-1.98-6.68-4.65-10.27-6.57-1.55-1.46-2.93-3.26-5.01-3.99-3.6-3.72-7.71-7.02-10.75-11.23l-.86-3c-1.06-1.8-1.18-4.27.08-6 .18-1.34.3-2.69.73-3.97 1.59-2.35 3.52-4.54 6.04-5.88 2.93-2.11 6.52-1.64 9.91-1.71 2.2-1.85 5.39-.55 8-1.01 1.4-1.19 3.37-.8 4.96-1.57 1.04-.57 2.1-1.12 3.17-1.63 9.87-4.03 15.86-13.35 21.11-22.11.97-1.69 2.09-3.27 3.03-4.97.99-2.53 2.72-4.65 3.99-7.03.97-1.68 2.07-3.28 2.98-5 .97-1.68 2.08-3.28 2.99-4.99 2.74-4.76 6.41-8.89 9.58-13.35 5.16-5.16 10-10.8 16.32-14.57 1.74-.87 3.32-2.02 4.98-3.03 1.61-.77 3.23-1.56 4.79-2.44 1.35-.6 2.71-1.15 4.13-1.56.99-.36 1.99-.69 3-1 1.59-.74 3.47-.52 4.99-1.46 1.35-.29 2.92-.03 4.01-1.08 1.65-.12 3.31-.21 4.96-.39m3.05 28.32c-1.3 1.4-3.34.78-5 1.07-.95.53-1.96.92-3.02 1.18a27.46 27.46 0 0 1-3.05.93l-4.08 1.98c-1.71.96-3.32 2.1-5.03 3.05-7.2 6.34-13.32 13.77-18.12 22.09l-.86 2.07c-1.06 1.63-2.2 3.22-3.12 4.93-.95 2.55-2.74 4.64-3.97 7.04-.98 1.68-2.13 3.26-3.01 5.01-1.37 2.48-3.18 4.7-4.54 7.19-1.43 1.58-3.18 2.98-4.01 5.01-4.37 4.27-8.24 9.29-13.33 12.69-1.25 1.1-2.51 2.21-3.94 3.08-1.47.65-2.93 1.32-4.43 1.91l-.02.47 2.44.89 1.99 1.23 2 .29c.97.52 1.99.88 3.08 1.08l2.05 1.14c1.63.58 3.44.55 4.96 1.43l1.93.35c1.74 1.51 4.41.1 6.07 1.75 3.59.66 7.87-1.1 11.01 1.04 1.67-.11 3.71.59 4.99-.89 3.33-.14 6.65 0 9.98-.14 1.59-1.73 4.34-.18 6.01-1.77l1.99-.32c1.48-1.01 3.39-.71 4.94-1.56 1.62-.76 3.3-1.35 4.97-1.97l5.99-3.03 2.04-.93c9.83-6.22 18.74-14.41 24.29-24.75.55-1.1 1.29-2.08 2.04-3.03.25-1.02.54-2.02.86-3.01l1.15-1.97c.22-1.06.52-2.09.92-3.09.29-1.02.62-2.01 1-2.99.2-1.1.61-2.1 1.21-3.02l.2-3.98c1.8-2.28.57-5.47.89-8.13l-24.39-24.4c-1.7 0-3.39.02-5.08.08z">
+          </path>
+        </svg> Personalize
+      </div>
+
+
+      <div class="item">
+        <img src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/terminal.png"> Open in
+        Windows Terminal
+      </div>
+
+      <div id="about" class="item">
+        <img src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/info.png"> About
+      </div>
+    </div>
+
+
+
+    <div class="notification_center">
+      <div class="notification_center_headar">
+        <span>Notifications</span>
+
+        <button class="clear_all_button">
+          <p>Clear all</p>
+
+        </button>
+        <hr>
+
+        <div class="Focus-asist">
+          <i class='bx bx-moon'></i>
+          <p>Focus asist settings</p>
+        </div>
+      </div>
+
+      <div class="Privacy">
+        <p>Privacy</p>
+        <i class='bx bx-dots-horizontal-rounded'></i>
+      </div>
+    </div>
+    <div class="calendar">
+      <div class="clock_header">
+        <span>Saturday, Sep 4</span>
+        <button class="calendar-collapse-button">
+          <i class='bx bx-chevron-down'></i>
+        </button>
+      </div>
+      <hr>
+
+
+      <div class="month">
+
+
+
+        <i class='bx bxs-up-arrow prev'></i>
+        <div class="date">
+
+          <h1></h1>
+          <p></p>
+
+        </div>
+        <i class='bx bxs-down-arrow next'></i>
+
+      </div>
+      <div class="weekdays">
+        <div>Sun</div>
+        <div>Mon</div>
+        <div>Tue</div>
+        <div>Wed</div>
+        <div>Thu</div>
+        <div>Fri</div>
+        <div>Sat</div>
+      </div>
+
+      <div class="days"></div>
+
+    </div>
+
+
+
+
+
+    <div class="pls-work">
+
+      <div class="startmenu">
+        <button class="back-button">
+          <i class='bx bx-chevron-left'></i> Back
+        </button>
+        <div class="all_apps">
+          All apps
+        </div>
+        <div class="all_apps_container">
+          <div class="all_apps_item">
+            <span class="all_apps_letter">A</span>
+          </div>
+          <div class="all_apps_item">
+            <!-- thats if its a letter !
+      <span class="all_apps_letter"></span>-->
+            <img src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/access.png">
+            <div class="app-name">
+              <p>Aceess</p>
+            </div>
+          </div>
+          <div class="all_apps_item">
+            <!-- thats if its a letter !
+      <span class="all_apps_letter"></span>-->
+            <img src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/alarm.png">
+            <div class="app-name">
+              <p>Alarms</p>
+            </div>
+          </div>
+          <div class="all_apps_item">
+            <span class="all_apps_letter">C</span>
+          </div>
+          <div id="calc_open_all_apps" class="all_apps_item">
+            <!-- thats if its a letter !
+      <span class="all_apps_letter"></span>-->
+            <img src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/calculator.png">
+            <div class="app-name">
+              <p>Calculator</p>
+            </div>
+          </div>
+          <div class="all_apps_item">
+            <!-- thats if its a letter !
+      <span class="all_apps_letter"></span>-->
+            <img src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/calendar.png">
+            <div class="app-name">
+              <p>Calendar</p>
+            </div>
+          </div>
+          <div class="all_apps_item">
+            <!-- thats if its a letter !
+      <span class="all_apps_letter"></span>-->
+            <img src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/camera.png">
+            <div class="app-name">
+              <p>Camera</p>
+            </div>
+          </div>
+          <div class="all_apps_item">
+            <!-- thats if its a letter !
+      <span class="all_apps_letter"></span>-->
+            <img src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/cortana.png">
+            <div class="app-name">
+              <p>Cortana</p>
+            </div>
+          </div>
+          <div class="all_apps_item">
+            <span class="all_apps_letter">D</span>
+          </div>
+          <div class="all_apps_item">
+            <!-- thats if its a letter !
+      <span class="all_apps_letter"></span>-->
+            <img src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/discord.png">
+            <div class="app-name">
+              <p>Discord</p>
+            </div>
+          </div>
+          <div class="all_apps_item">
+            <span class="all_apps_letter">E</span>
+          </div>
+          <div class="all_apps_item">
+            <!-- thats if its a letter !
+      <span class="all_apps_letter"></span>-->
+            <img src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/edge.png">
+            <div class="app-name">
+              <p>Edge</p>
+            </div>
+          </div>
+          <div class="all_apps_item">
+            <!-- thats if its a letter !
+      <span class="all_apps_letter"></span>-->
+            <img src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/excel.png">
+            <div class="app-name">
+              <p>Excel</p>
+            </div>
+          </div>
+          <div class="all_apps_item">
+
+            <span class="all_apps_letter">F</span>
+
+          </div>
+          <div class="all_apps_item">
+            <!-- thats if its a letter !
+      <span class="all_apps_letter"></span>-->
+            <img src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/feedback.png">
+            <div class="app-name">
+              <p>Feedback</p>
+            </div>
+          </div>
+          <div class="all_apps_item">
+            <!-- thats if its a letter !
+      <span class="all_apps_letter"></span>-->
+            <img src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/explorer.png">
+            <div class="app-name">
+              <p>File explorer</p>
+            </div>
+          </div>
+          <div class="all_apps_item">
+            <span class="all_apps_letter">G</span>
+
+          </div>
+          <div class="all_apps_item">
+            <!-- thats if its a letter !
+      <span class="all_apps_letter"></span>-->
+            <img src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/getstarted.png">
+            <div class="app-name">
+              <p>Get Started</p>
+            </div>
+          </div>
+          <div class="all_apps_item">
+            <!-- thats if its a letter !
+      <span class="all_apps_letter"></span>-->
+            <img src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/github.png">
+            <div class="app-name">
+              <p>Github</p>
+            </div>
+          </div>
+          <div class="all_apps_item">
+            <!-- thats if its a letter !
+      <span class="all_apps_letter"></span>-->
+            <img src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/groove.png">
+            <div class="app-name">
+              <p>Groove Music</p>
+            </div>
+          </div>
+          <div class="all_apps_item">
+
+            <span class="all_apps_letter">H</span>
+          </div>
+          <div class="all_apps_item">
+            <!-- thats if its a letter !
+      <span class="all_apps_letter"></span>-->
+            <img src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/help.png">
+            <div class="app-name">
+              <p>Help</p>
+            </div>
+          </div>
+          <div class="all_apps_item">
+
+            <span class="all_apps_letter">M</span>
+
+          </div>
+          <div class="all_apps_item">
+            <!-- thats if its a letter !
+      <span class="all_apps_letter"></span>-->
+            <img src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/mail.png">
+            <div class="app-name">
+              <p>Mail</p>
+            </div>
+          </div>
+          <div class="all_apps_item">
+            <!-- thats if its a letter !
+      <span class="all_apps_letter"></span>-->
+            <img src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/maps.png">
+            <div class="app-name">
+              <p>Maps</p>
+            </div>
+          </div>
+          <div class="all_apps_item">
+            <!-- thats if its a letter !
+      <span class="all_apps_letter"></span>-->
+            <img src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/movies.png">
+            <div class="app-name">
+              <p>Movies</p>
+            </div>
+          </div>
+          <div class="all_apps_item">
+            <!-- thats if its a letter !
+      <span class="all_apps_letter"></span>-->
+            <img src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/msoffice.png">
+            <div class="app-name">
+              <p>MsOffice</p>
+            </div>
+          </div>
+          <div class="all_apps_item">
+            <span class="all_apps_letter">N</span>
+
+          </div>
+          <div class="all_apps_item">
+            <!-- thats if its a letter !
+      <span class="all_apps_letter"></span>-->
+            <img src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/narrator.png">
+            <div class="app-name">
+              <p>Narrator</p>
+            </div>
+          </div>
+          <div class="all_apps_item">
+            <!-- thats if its a letter !
+      <span class="all_apps_letter"></span>-->
+            <img src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/news.png">
+            <div class="app-name">
+              <p>News</p>
+            </div>
+          </div>
+          <div class="all_apps_item">
+            <!-- thats if its a letter !
+      <span class="all_apps_letter"></span>-->
+            <img src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/netflix.png">
+            <div class="app-name">
+              <p>Netflix</p>
+            </div>
+          </div>
+          <div class="all_apps_item">
+            <!-- thats if its a letter !
+      <span class="all_apps_letter"></span>-->
+            <img src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/notepad.png">
+            <div class="app-name">
+              <p>Notepad</p>
+            </div>
+          </div>
+          <div class="all_apps_item">
+
+            <span class="all_apps_letter">O</span>
+          </div>
+          <div class="all_apps_item">
+            <!-- thats if its a letter !
+      <span class="all_apps_letter"></span>-->
+            <img src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/oneDrive.png">
+            <div class="app-name">
+              <p>OneDrive</p>
+            </div>
+          </div>
+          <div class="all_apps_item">
+            <!-- thats if its a letter !
+      <span class="all_apps_letter"></span>-->
+            <img src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/onenote.png">
+            <div class="app-name">
+              <p>OneNote</p>
+            </div>
+          </div>
+          <div class="all_apps_item">
+            <!-- thats if its a letter !
+      <span class="all_apps_letter"></span>-->
+            <img src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/outlook.png">
+            <div class="app-name">
+              <p>Out Look</p>
+            </div>
+          </div>
+          <div class="all_apps_item">
+
+            <span class="all_apps_letter">P</span>
+          </div>
+          <div class="all_apps_item">
+            <!-- thats if its a letter !
+      <span class="all_apps_letter"></span>-->
+            <img src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/paint.png">
+            <div class="app-name">
+              <p>Paint</p>
+            </div>
+          </div>
+          <div class="all_apps_item">
+            <!-- thats if its a letter !
+      <span class="all_apps_letter"></span>-->
+            <img src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/paint3d.png">
+            <div class="app-name">
+              <p>Paint 3d</p>
+            </div>
+          </div>
+          <div class="all_apps_item">
+            <!-- thats if its a letter !
+      <span class="all_apps_letter"></span>-->
+            <img src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/people.png">
+            <div class="app-name">
+              <p>People</p>
+            </div>
+          </div>
+          <div class="all_apps_item">
+            <!-- thats if its a letter !
+      <span class="all_apps_letter"></span>-->
+            <img src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/photopea (1).png">
+            <div class="app-name">
+              <p>Photopea</p>
+            </div>
+          </div>
+          <div class="all_apps_item">
+            <!-- thats if its a letter !
+      <span class="all_apps_letter"></span>-->
+            <img src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/photos.png">
+            <div class="app-name">
+              <p>Photos</p>
+            </div>
+          </div>
+
+          <div class="all_apps_item">
+            <!-- thats if its a letter !
+      <span class="all_apps_letter"></span>-->
+            <img src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/pinterest.png">
+            <div class="app-name">
+              <p>Pinterest</p>
+            </div>
+          </div>
+          <div class="all_apps_item">
+            <!-- thats if its a letter !
+      <span class="all_apps_letter"></span>-->
+            <img src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/powerpoint.png">
+            <div class="app-name">
+              <p>Power Point</p>
+            </div>
+          </div>
+          <div class="all_apps_item">
+
+            <span class="all_apps_letter">R</span>
+
+          </div>
+          <div class="all_apps_item">
+            <!-- thats if its a letter !
+      <span class="all_apps_letter"></span>-->
+            <img src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/bin0.png">
+            <div class="app-name">
+              <p>Recycle Bin</p>
+            </div>
+          </div>
+          <div class="all_apps_item">
+            <span class="all_apps_letter">S</span>
+          </div>
+          <div class="all_apps_item">
+            <!-- thats if its a letter !
+      <span class="all_apps_letter"></span>-->
+            <img src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/security.png">
+            <div class="app-name">
+              <p>Security</p>
+            </div>
+          </div>
+          <div class="all_apps_item">
+            <!-- thats if its a letter !
+      <span class="all_apps_letter"></span>-->
+            <img src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/settings.png">
+            <div class="app-name">
+              <p>Settings</p>
+            </div>
+          </div>
+          <div class="all_apps_item">
+            <!-- thats if its a letter !
+      <span class="all_apps_letter"></span>-->
+            <img src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/share.png">
+            <div class="app-name">
+              <p>Share</p>
+            </div>
+          </div>
+          <div class="all_apps_item">
+            <!-- thats if its a letter !
+      <span class="all_apps_letter"></span>-->
+            <img src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/skype.png">
+            <div class="app-name">
+              <p>Skype</p>
+            </div>
+          </div>
+          <div class="all_apps_item">
+            <!-- thats if its a letter !
+      <span class="all_apps_letter"></span>-->
+            <img src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/snip.png">
+            <div class="app-name">
+              <p>Snipping Tool</p>
+            </div>
+          </div>
+          <div class="all_apps_item">
+            <!-- thats if its a letter !
+      <span class="all_apps_letter"></span>-->
+            <img src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/soltaire.png">
+            <div class="app-name">
+              <p>Soltaire</p>
+            </div>
+          </div>
+          <div class="all_apps_item">
+            <!-- thats if its a letter !
+      <span class="all_apps_letter"></span>-->
+            <img src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/spotify.png">
+            <div class="app-name">
+              <p>Spotify</p>
+            </div>
+          </div>
+          <div class="all_apps_item">
+            <!-- thats if its a letter !
+      <span class="all_apps_letter"></span>-->
+            <img src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/notes.png">
+            <div class="app-name">
+              <p>Sticky Notes</p>
+            </div>
+          </div>
+          <div class="all_apps_item">
+            <!-- thats if its a letter !
+      <span class="all_apps_letter"></span>-->
+            <img
+              src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/Microsoft_Store_2021.png">
+            <div class="app-name">
+              <p>Store</p>
+            </div>
+          </div>
+          <div class="all_apps_item">
+            <span class="all_apps_letter">T</span>
+          </div>
+          <div class="all_apps_item">
+            <!-- thats if its a letter !
+      <span class="all_apps_letter"></span>-->
+            <img src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/teams.png">
+            <div class="app-name">
+              <p>Teams</p>
+            </div>
+          </div>
+          <div class="all_apps_item">
+            <!-- thats if its a letter !
+      <span class="all_apps_letter"></span>-->
+            <img src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/terminal.png">
+            <div class="app-name">
+              <p>Terminal</p>
+            </div>
+          </div>
+          <div class="all_apps_item">
+            <!-- thats if its a letter !
+      <span class="all_apps_letter"></span>-->
+            <img src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/tips.png">
+            <div class="app-name">
+              <p>Tips</p>
+            </div>
+          </div>
+          <div class="all_apps_item">
+            <!-- thats if its a letter !
+      <span class="all_apps_letter"></span>-->
+            <img src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/todo.png">
+            <div class="app-name">
+              <p>To Do</p>
+            </div>
+          </div>
+          <div class="all_apps_item">
+            <!-- thats if its a letter !
+      <span class="all_apps_letter"></span>-->
+            <img src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/twitter.png">
+            <div class="app-name">
+              <p>Twitter</p>
+            </div>
+          </div>
+          <div class="all_apps_item">
+            <span class="all_apps_letter">V</span>
+          </div>
+          <div class="all_apps_item">
+            <!-- thats if its a letter !
+      <span class="all_apps_letter"></span>-->
+            <img src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/visio.png">
+            <div class="app-name">
+              <p>Visio</p>
+            </div>
+          </div>
+          <div class="all_apps_item">
+            <!-- thats if its a letter !
+      <span class="all_apps_letter"></span>-->
+            <img src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/code.png">
+            <div class="app-name">
+              <p>Vs Code</p>
+            </div>
+          </div>
+          <div class="all_apps_item">
+            <!-- thats if its a letter !
+      <span class="all_apps_letter"></span>-->
+            <img src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/voice.png">
+            <div class="app-name">
+              <p>Voice Recorder</p>
+            </div>
+          </div>
+          <div class="all_apps_item">
+            <span class="all_apps_letter">W</span>
+          </div>
+          <div class="all_apps_item">
+            <!-- thats if its a letter !
+      <span class="all_apps_letter"></span>-->
+            <img src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/weather.png">
+            <div class="app-name">
+              <p>Weather</p>
+            </div>
+          </div>
+          <div class="all_apps_item">
+            <!-- thats if its a letter !
+      <span class="all_apps_letter"></span>-->
+            <img src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/board.png">
+            <div class="app-name">
+              <p>White Board</p>
+            </div>
+          </div>
+          <div class="all_apps_item">
+            <!-- thats if its a letter !
+      <span class="all_apps_letter"></span>-->
+            <img src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/wikipedia.png">
+            <div class="app-name">
+              <p>Wikipedia</p>
+            </div>
+          </div>
+          <div class="all_apps_item">
+            <!-- thats if its a letter !
+      <span class="all_apps_letter"></span>-->
+            <img src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/winWord.png">
+            <div class="app-name">
+              <p>Word 2021</p>
+            </div>
+          </div>
+          <div class="all_apps_item">
+            <span class="all_apps_letter">X</span>
+          </div>
+          <div class="all_apps_item">
+            <!-- thats if its a letter !
+      <span class="all_apps_letter"></span>-->
+            <img src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/xbox.png">
+            <div class="app-name">
+              <p>Xbox</p>
+            </div>
+          </div>
+          <div class="all_apps_item">
+            <span class="all_apps_letter">Y</span>
+          </div>
+          <div class="all_apps_item">
+            <!-- thats if its a letter !
+      <span class="all_apps_letter"></span>-->
+            <img src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/yammer.png">
+            <div class="app-name">
+              <p>Yammer</p>
+            </div>
+          </div>
+          <div class="all_apps_item">
+            <!-- thats if its a letter !
+      <span class="all_apps_letter"></span>-->
+            <img src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/yphone.png">
+            <div class="app-name">
+              <p>Your Phone</p>
+            </div>
+          </div>
+          <div class="all_apps_item">
+            <!-- thats if its a letter !
+      <span class="all_apps_letter"></span>-->
+            <img src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/youtube.png">
+            <div class="app-name">
+              <p>Youtube</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="Search-Bar">
+          <i class='bx bx-search'></i>
+          <input type="text" placeholder="Type here to search">
+
+        </div>
+        <div class="startmenu_header">
+          <button class="allappsbutton">
+            All apps <i class='bx bx-chevron-right'></i>
+          </button>
+          <h3>Pinned</h3>
+        </div>
+
+        <div class="recommended">
+          <h3>Recommended</h3>
+          <button class="Show-More-Button">
+            More<i class='bx bx-chevron-right'></i>
+          </button>
+
+        </div>
+        <div class="used-apps-container">
+          <div class="used_apps">
+            <img src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/winWord.png">
+
+            <h1>answer_to_anything.docx</h1>
+
+            <p>Last week</p>
+          </div>
+          <div class="used_apps">
+            <img src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/getstarted.png">
+
+            <h1>Get Started</h1>
+
+            <p>Welcome to Windows</p>
+          </div>
+          <div class="used_apps">
+            <img src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/excel.png">
+
+            <h1>New document.excl</h1>
+
+            <p>4.5hours ago</p>
+          </div>
+          <div class="used_apps">
+            <img src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/image.png">
+
+            <h1>windows_logo.png</h1>
+
+            <p> 1h ago</p>
+          </div>
+          <div class="used_apps">
+            <img src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/folder.png">
+
+            <h1>New folder</h1>
+
+            <p> 4.5h ago </p>
+          </div>
+          <div class="used_apps">
+            <img src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/audio_file.png">
+
+            <h1>cringe_tiktok_songs.mp3</h1>
+
+            <p>13m ago </p>
+          </div>
+
+
+        </div>
+        <div class="hr">
+
+        </div>
+
+        <div class="User-Footer">
+          <img id="user_img" src="https://avatars.githubusercontent.com/u/91379432?v=4">
+          <div class="User">
+            <h3>RedEdge</h3>
+          </div>
+          <!--<div class="power-off">
+  <i class='bx bx-power-off'></i>
+</div>-->
+
+          <div class="dropdown">
+            <img onclick="myFunction()" class="dropbtn"
+              src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Ui_icons/shutdown-shut-close-power-off-switchoff-4-14608.png">
+
+            <div id="myDropdown" class="dropdown-content">
+
+              <a id="lock_the_screen"> <i class="fal fa-lock"></i> Lock</a>
+              <a> <i class="fal fa-power-off"></i> Shut Down</a>
+              <a> <i class="fal fa-redo"></i> Restart</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="pinned-app-container">
+          <div class="p-apps">
+            <div class="notification-circle"></div><img
+              src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/edge.png">
+            <p> Edge</p>
+          </div>
+          <div class="p-apps">
+            <div class="notification-circle5"></div><img
+              src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/photopea (1).png">
+            <p> Photopea</p>
+          </div>
+          <div class="p-apps"><img
+              src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/calendar.png">
+            <p> Calendar</p>
+          </div>
+          <div class="p-apps"><img
+              src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/Microsoft_Store_2021.png">
+            <p> Store</p>
+          </div>
+          <div class="p-apps">
+            <div class="notification-circle1"></div> <img
+              src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/teams.png">
+            <p> Teams</p>
+          </div>
+          <div class="p-apps"><img
+              src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/notepad.png">
+            <p> NotePad</p>
+          </div>
+          <div class="p-apps"><img
+              src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/spotify.png">
+            <p> Spotify</p>
+          </div>
+          <div class="p-apps"><img
+              src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/netflix.png">
+            <p> Netflix</p>
+          </div>
+          <div class="p-apps">
+            <div class="notification-circle4"></div><img id="calc_open_pinned"
+              src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/calculator.png">
+            <p> Calculator</p>
+          </div>
+          <div class="p-apps"><img
+              src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/powerpoint.png">
+            <p> Power Point</p>
+          </div>
+          <div class="p-apps"><img
+              src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/news.png">
+            <p> News</p>
+          </div>
+          <div class="p-apps"><img
+              src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/photos.png">
+            <p> Photos</p>
+          </div>
+          <div class="p-apps"><img
+              src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/winWord.png">
+            <p> Word</p>
+          </div>
+          <div class="p-apps"><img
+              src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/code.png">
+            <p> VS code</p>
+          </div>
+          <div class="p-apps">
+            <div class="notification-circle3"></div><img
+              src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/terminal.png">
+            <p> Terminal</p>
+          </div>
+          <div class="p-apps"><img id="todo_open_pinned"
+              src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/todo.png">
+            <p> ToDo</p>
+          </div>
+          <div class="p-apps">
+            <div class="notification-circle2"></div><a href="https://github.com/RedEdge967/win11-web"
+              target="_blank"><img
+                src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/github.png"></a>
+            <p>Github</p>
+          </div>
+
+          <div class="p-apps"><img id="excel_open_pinned "
+              src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/excel.png">
+            <p> Excel</p>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+    <!--<div class="justify_content">
+<div class="virtual_desktop_apps_container">
+  <div class="New_desktop">
+    <div class="New_desktop_header"> New Desktop</div>
+    +
+  </div>
 </div>
+</div>-->
+    <div class="Nav-Container" id="Nav-Container">
 
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * The content above * * * * * * * * * * * -->
-<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
-<!-- * * * * * * * * * * and can be replaced. * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * End of Placeholder * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+      <div class="taskbar_context_menu">
+        <div onmouseover="onhover1()" onmouseout="onhover1()" class="taskbar_context_menu_sml">
+          <div id="center" class="taskbar_context_menu_sml_opt"> Center</div>
+          <div id="left" class="taskbar_context_menu_sml_opt"> Left</div>
+        </div>
 
-<router-outlet></router-outlet>
+        <div class="taskbar_context_menu_sml_one">
+          <div id="show" class="taskbar_context_menu_sml_opt"> Show</div>
+          <div id="hide" class="taskbar_context_menu_sml_opt"> Hide</div>
+        </div>
+        <div onmouseover="onhover1()" onmouseout="onhover1()" id="align_icons" class="taskbar_context_menu_opt">Align
+          Icons <i id="chevron" class="fal fa-chevron-right"></i></div>
+        <div onmouseover="onhover2()" onmouseout="onhover2()" class="taskbar_context_menu_opt">Search <i id="chevron"
+            class="fal fa-chevron-right"></i></div>
+        <div class="taskbar_context_menu_opt">Widgets <i id="chevron" class="fal fa-chevron-right"></i></div>
+        <div class="taskbar_context_menu_opt">Show Desktop <i id="chevron" class="fal fa-chevron-right"></i></div>
+      </div>
+      <ul style="z-index: 10;">
+
+
+        <li><span class="tooltip">Start</span> <img id="icon"
+            src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/Deafult%20test%20icon.png">
+        </li>
+        <li><span class="tooltip">Search</span><img id="icon2"
+            src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/search.png"></li>
+        <li><span class="tooltip">Virtual Desktops</span><img id="iconVirtualDesktops"
+            src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/set-different-wallpaper-different-desktops.png">
+        </li>
+        <li><span class="tooltip">Widgets</span><img id="icon3"
+            src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/widget.png"></li>
+        <!-- <li><span class="tooltip"> Teams</span><img id="iconteams"src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/microsoft%20teams.png"></li>-->
+        <li><span class="tooltip">Edge</span><img id="icon4"
+            src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/edge.png"></li>
+        <li><span class="tooltip">File Explorer</span><img id="icon5"
+            src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/explorer.png"></li>
+        <li id="store_unit"><span class="line1"></span><span class="tooltip"> Store</span><img id="icon6"
+            src="assets/images/icon_qldh.png">
+        </li>
+        <li id="settings"><span class="line"></span><span id="tool_tip_explorer" class="tooltip">Settings</span><img
+            class="icon7" id="icon7"
+            src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/settings.png"></li>
+        <li id="emr_unit" class="display_hide"><span id="lineemr"></span><span class="tooltip"> EMR</span><img class="iconemr"
+            id="iconemr" src="assets/images/icon_emr.png" width="24"></li>
+
+
+
+
+      </ul>
+      <div class="Quick-Settings-Container" style="z-index: 10;">
+        <div class="settings">
+          <div class="settings-column">
+            <i class='bx bx-wifi'></i>
+            <p>Wifi</p>
+          </div>
+          <div class="settings-column1">
+            <i class='bx bx-bluetooth'></i>
+            <p>Bluetooth</p>
+          </div>
+          <div class="settings-column2">
+            <img id="night_light" width="16px"
+              src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/nightlight.png">
+            <p>Night light</p>
+          </div>
+          <div class="settings-column3">
+            <img id="battery_saver" width="16px"
+              src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Icons/saver.png">
+            <p>Battery Saver</p>
+          </div>
+          <div class="settings-column6">
+            <i class='bx bxs-plane bx-rotate-90'></i>
+            <p>Airplane mode</p>
+          </div>
+
+          <div class="settings-column5">
+            <img id="theme_button" width="16px"
+              src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Ui_icons/brightness.png">
+            <p>Theme</p>
+          </div>
+        </div>
+        <div class="range">
+          <div class="sliderValue">
+            <span>100 </span>
+
+          </div>
+
+          <div class="field">
+            <img id="brightness"
+              src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Ui_icons/brightness.png">
+            <input class="slider" id="range" type="range" min="0" max="100" value="100" steps="100">
+            <div class="progressbar">
+
+            </div>
+            <div class="value right">
+            </div>
+
+
+            <!--SecOND-->
+            <div class="range">
+              <div id="slidervalue1" class="sliderValue1">
+                <span>0</span>
+              </div>
+              <div class="field1">
+                <!--<img id= "audio_mute" src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Ui_icons/audio_mute.png">
+    <img id= "audio_one" src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Ui_icons/audio_level1.png">-->
+                <img id="audio"
+                  src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Ui_icons/audio2.png">
+                <!--<img id= "audio_max" src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Ui_icons/audio3.png">-->
+                <input id="range" type="range" min="0" max="100" value="75" steps="0">
+                <div class="progressbar1">
+
+                </div>
+                <div class="value right">
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+        </div>
+        <i class="fal fa-chevron-right"></i>
+        <div class="Quick-Settings-Container-Footer">
+
+          <div class="options">
+            <i class='bx bx-pencil'> </i>
+            <i class='bx bx-cog'></i>
+          </div>
+          <div class="battery">
+
+            <img class="plug" src="https://win11.blueedge.me/img/icon/ui/plug.png">
+            <i class="fal fa-battery-empty"></i>
+            <div class="battery_percent2"></div>
+            <span></span>
+          </div>
+        </div>
+      </div>
+      <div class="Chevron-up"> <i class="fal fa-chevron-up" style="z-index: 10;"></i></div>
+
+      <div class="Quick_Settings" style="z-index: 10;">
+        <i class='bx bx-wifi' style="margin-right:5px"></i>
+        <img id="plug" src="https://win11.blueedge.me/img/icon/ui/plug.png">
+        <img id="function" style="margin-right:5px"
+          src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Ui_icons/audio2.png">
+        <!-- <img id="function" src="https://raw.githubusercontent.com/cupofcoffebruh/Binbows11-copy/main/Ui_icons/battery.png">-->
+        <div class="battery_percent"></div>
+        <i class="fal fa-battery-empty"></i>
+      </div>
+      <div class="clock" style="z-index: 10;">
+        <span class="tooltip1">Quick Acces</span>
+        <span class="clock-time">20:56</span>
+        <span class="clock-ampm">PM</span>
+
+        <br>
+
+        <span class="date">
+          08/09/21
+        </span>
+
+
+
+      </div>
+    </div>
+
+  </main>
+
+
+
+
+
+
+  <!-- <script src="./main.js"></script> -->
+  <!-- <script src="clock.js"></script> -->
+
+
+</body>
+
+</html>
